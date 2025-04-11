@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyectosistemaexamenes;
+package estudiante;
+
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -15,6 +19,25 @@ public class JFormE_VerResultados extends javax.swing.JFrame {
      */
     public JFormE_VerResultados() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+          // Añadir ícono al botón Regresar
+      btnRegresar.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_regresar.png")));
+      btnRegresar.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnRegresar.setIconTextGap(5); //separar texto del icono
+      
+
+    // Añadir efecto hover a cada botón
+      Color btnColor = new Color(0, 102, 204); // Azul original
+      Color btnHoverColor = new Color(0, 82, 164); // Azul más oscuro
+    btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnRegresar.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnRegresar.setBackground(btnColor);
+        }
+    });
     }
 
     /**
@@ -32,12 +55,21 @@ public class JFormE_VerResultados extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("VER RESULTADOS");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Resultados de tus exámenes:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -53,7 +85,9 @@ public class JFormE_VerResultados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnRegresar.setBackground(new java.awt.Color(0, 102, 204));
         btnRegresar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +126,7 @@ public class JFormE_VerResultados extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addGap(20, 20, 20))
         );
@@ -106,6 +140,14 @@ public class JFormE_VerResultados extends javax.swing.JFrame {
         formularioEstudiante.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        if (!JFormEstudiante.getInstance().isVisible()) {
+        JFormEstudiante formularioEstudiante = JFormEstudiante.getInstance();
+        formularioEstudiante.setVisible(true);
+    }
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

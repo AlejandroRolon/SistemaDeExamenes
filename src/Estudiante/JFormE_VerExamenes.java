@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package proyectosistemaexamenes;
+
+package estudiante;
+
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -15,6 +16,40 @@ public class JFormE_VerExamenes extends javax.swing.JFrame {
      */
     public JFormE_VerExamenes() {
         initComponents();
+        setLocationRelativeTo(null);
+           // Añadir ícono al botón Examen
+      btnRealizarExamen.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_examen.png")));
+      btnRealizarExamen.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnRealizarExamen.setIconTextGap(5); //separar texto del icono
+      
+         // Añadir ícono al botón Regresar
+      btnRegresar.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_regresar.png")));
+      btnRegresar.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnRegresar.setIconTextGap(5); //separar texto del icono
+         
+
+    // Añadir efecto hover a cada botón
+    Color btnColor = new Color(0, 102, 204); // Azul original
+    Color btnHoverColor = new Color(0, 82, 164); // Azul más oscuro
+    btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnRegresar.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnRegresar.setBackground(btnColor);
+        }
+        
+    });
+   
+    // Añadir efecto hover a cada botón
+    btnRealizarExamen.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnRealizarExamen.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnRealizarExamen.setBackground(btnColor);
+        }
+    });
     }
 
     /**
@@ -34,9 +69,16 @@ public class JFormE_VerExamenes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("VER EXAMENES");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -52,7 +94,9 @@ public class JFormE_VerExamenes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnRealizarExamen.setBackground(new java.awt.Color(0, 102, 204));
         btnRealizarExamen.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnRealizarExamen.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarExamen.setText("Realizar Examen");
         btnRealizarExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,9 +107,12 @@ public class JFormE_VerExamenes extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Selecciona materia: ");
 
+        btnRegresar.setBackground(new java.awt.Color(0, 102, 204));
         btnRegresar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,17 +170,24 @@ public class JFormE_VerExamenes extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        JFormEstudiante formularioEstudiante = new JFormEstudiante();
+       JFormEstudiante formularioEstudiante = JFormEstudiante.getInstance();
         formularioEstudiante.setVisible(true);
-        this.dispose();
+       this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRealizarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarExamenActionPerformed
         // TODO add your handling code here:
-        JFormE_RealizarExamen realizarExamen = new JFormE_RealizarExamen();
-        realizarExamen.setVisible(true);
-        this.dispose();
+        JFormE_RealizarExamen realizarExamen = new JFormE_RealizarExamen("verExamenes");
+       realizarExamen.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btnRealizarExamenActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if (!JFormEstudiante.getInstance().isVisible()) {
+        JFormEstudiante formularioEstudiante = JFormEstudiante.getInstance();
+        formularioEstudiante.setVisible(true);
+    }
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -1,22 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package proyectosistemaexamenes;
+
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author ALEJANDRO
  */
 public class JFormInicio extends javax.swing.JFrame {
+    String usuario, pass;
 
     /**
      * Creates new form JFormInicio
      */
     public JFormInicio() {
         initComponents();
-    }
+        setLocationRelativeTo(null);
+        txtUsuario.setText("");
+        txtPass.setText("");
+        
+          // Añadir ícono al botón Entrar
+      btnEntrar.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_login.png")));
+      btnEntrar.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnEntrar.setIconTextGap(5); //separar texto del icono
+     
+        
+         // Añadir efecto hover a cada botón
+         Color btnColor = new Color(0, 102, 204); // Azul original
+         Color btnHoverColor = new Color(0, 82, 164); // Azul más oscuro
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+         public void mouseEntered(java.awt.event.MouseEvent evt) {
+         btnEntrar.setBackground(btnHoverColor);
+          }
 
+    @Override
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        btnEntrar.setBackground(btnColor);
+      }
+    });
+  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,27 +54,38 @@ public class JFormInicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        txtPass = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("INICIO DE SESION");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuario:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Contraseña:");
 
-        jTextField1.setText("jTextField1");
+        txtUsuario.setText("jTextField1");
 
-        jPasswordField1.setText("jPasswordField1");
+        txtPass.setText("jPasswordField1");
 
+        btnEntrar.setBackground(new java.awt.Color(0, 102, 204));
         btnEntrar.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,10 +102,9 @@ public class JFormInicio extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel3)
                                 .addGap(11, 11, 11)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addComponent(txtUsuario)
+                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
@@ -87,11 +122,11 @@ public class JFormInicio extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(btnEntrar)
                 .addContainerGap(74, Short.MAX_VALUE))
@@ -99,6 +134,10 @@ public class JFormInicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,7 +179,7 @@ public class JFormInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

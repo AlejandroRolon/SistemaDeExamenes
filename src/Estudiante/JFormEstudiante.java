@@ -1,21 +1,94 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package proyectosistemaexamenes;
+
+package estudiante;
+
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import proyectosistemaexamenes.JFormInicio;
 
 /**
  *
  * @author ALEJANDRO
  */
 public class JFormEstudiante extends javax.swing.JFrame {
+    private static JFormEstudiante  instance;
 
-    /**
-     * Creates new form JFormEstudiante
-     */
+    
+
+    
     public JFormEstudiante() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+           // Añadir ícono al botón Examen
+      btnHacerExamen.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_examen.png")));
+      btnHacerExamen.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnHacerExamen.setIconTextGap(5); //separar texto del icono
+      
+       // Añadir ícono al botón Cerrar Sesión
+      btnCerrarSesion.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_cerrar.png")));
+      btnCerrarSesion.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnCerrarSesion.setIconTextGap(5); //separar texto del icono
+      
+       // Añadir ícono al botón Ver Examenes
+      btnVerExamenes.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_examenes.png")));
+      btnVerExamenes.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnVerExamenes.setIconTextGap(5); //separar texto del icono
+      
+       // Añadir ícono al botón Ver Resultados
+      btnResultados.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_resultados.png")));
+      btnResultados.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnResultados.setIconTextGap(5); //separar texto del icono
+   
+
+    // Añadir efecto hover a cada botón
+    Color btnColor = new Color(0, 102, 204); // Azul original
+    Color btnHoverColor = new Color(0, 82, 164); // Azul más oscuro
+    btnVerExamenes.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnVerExamenes.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnVerExamenes.setBackground(btnColor);
+        }
+    });
+
+    btnResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnResultados.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnResultados.setBackground(btnColor);
+        }
+    });
+
+    btnHacerExamen.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnHacerExamen.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnHacerExamen.setBackground(btnColor);
+        }
+    });
+
+    btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnCerrarSesion.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnCerrarSesion.setBackground(btnColor);
+        }
+    });
+
+}
+    
+     public static JFormEstudiante getInstance() {
+        if (instance == null) {
+            instance = new JFormEstudiante();
+        }
+        return instance;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,15 +106,25 @@ public class JFormEstudiante extends javax.swing.JFrame {
         btnResultados = new javax.swing.JButton();
         btnHacerExamen = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PANEL ESTUDIANTE");
 
         lblBienvenido.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblBienvenido.setForeground(new java.awt.Color(0, 0, 0));
         lblBienvenido.setText("Bienvenido, [Nombre]");
 
-        btnCerrarSesion.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnCerrarSesion.setBackground(new java.awt.Color(0, 102, 204));
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnCerrarSesion.setText("Cerrar Sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,7 +132,9 @@ public class JFormEstudiante extends javax.swing.JFrame {
             }
         });
 
-        btnVerExamenes.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnVerExamenes.setBackground(new java.awt.Color(0, 102, 204));
+        btnVerExamenes.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnVerExamenes.setForeground(new java.awt.Color(255, 255, 255));
         btnVerExamenes.setText("Ver Examenes");
         btnVerExamenes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +142,9 @@ public class JFormEstudiante extends javax.swing.JFrame {
             }
         });
 
-        btnResultados.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnResultados.setBackground(new java.awt.Color(0, 102, 204));
+        btnResultados.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnResultados.setForeground(new java.awt.Color(255, 255, 255));
         btnResultados.setText("Ver Resultados");
         btnResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +152,9 @@ public class JFormEstudiante extends javax.swing.JFrame {
             }
         });
 
-        btnHacerExamen.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnHacerExamen.setBackground(new java.awt.Color(0, 102, 204));
+        btnHacerExamen.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnHacerExamen.setForeground(new java.awt.Color(255, 255, 255));
         btnHacerExamen.setText("Realizar Examen");
         btnHacerExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +173,7 @@ public class JFormEstudiante extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblBienvenido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion)
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
@@ -113,7 +202,7 @@ public class JFormEstudiante extends javax.swing.JFrame {
                 .addComponent(btnResultados)
                 .addGap(30, 30, 30)
                 .addComponent(btnHacerExamen)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,10 +231,16 @@ public class JFormEstudiante extends javax.swing.JFrame {
 
     private void btnHacerExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHacerExamenActionPerformed
         // TODO add your handling code here:
-        JFormE_RealizarExamen realizarExamen = new JFormE_RealizarExamen();
+        JFormE_RealizarExamen realizarExamen = new JFormE_RealizarExamen("estudiante");
         realizarExamen.setVisible(true);
         this.dispose();
+        
+       
     }//GEN-LAST:event_btnHacerExamenActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

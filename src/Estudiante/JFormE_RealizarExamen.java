@@ -2,19 +2,61 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyectosistemaexamenes;
+package estudiante;
+
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author ALEJANDRO
  */
 public class JFormE_RealizarExamen extends javax.swing.JFrame {
+    private String origen;
 
     /**
      * Creates new form JFormE_RealizarExamen
      */
-    public JFormE_RealizarExamen() {
+    public JFormE_RealizarExamen(String origen) {
         initComponents();
+        setLocationRelativeTo(null);
+        
+         // Añadir ícono al botón Cancelar
+      btnCancelar.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_cancelar.png")));
+      btnCancelar.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnCancelar.setIconTextGap(5); //separar texto del icono
+      
+        // Añadir ícono al botón Respuesta
+      btnEnviarRespuesta.setIcon(new ImageIcon(getClass().getResource("/iconos/icono_enviar.png")));
+      btnEnviarRespuesta.setHorizontalTextPosition(SwingConstants.LEFT); // Texto a la izquierda
+      btnEnviarRespuesta.setIconTextGap(5); //separar texto del icono
+       this.origen = origen;
+        bloquearCierre();
+        
+       
+
+    // Añadir efecto hover a cada botón
+    Color btnColor = new Color(0, 102, 204); // Azul original
+    Color btnHoverColor = new Color(0, 82, 164); // Azul más oscuro
+    btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnCancelar.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnCancelar.setBackground(btnColor);
+        }
+    });
+    
+    btnEnviarRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent evt) {
+            btnEnviarRespuesta.setBackground(btnHoverColor);
+        }
+        public void mouseExited(java.awt.event.MouseEvent evt) {
+            btnEnviarRespuesta.setBackground(btnColor);
+        }
+    });
     }
 
     /**
@@ -31,15 +73,20 @@ public class JFormE_RealizarExamen extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnEnviarRespuesta = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("REALIZAR EXAMEN");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Examen : [Nombre]");
 
+        btnCancelar.setBackground(new java.awt.Color(0, 102, 204));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,7 +94,9 @@ public class JFormE_RealizarExamen extends javax.swing.JFrame {
             }
         });
 
+        btnEnviarRespuesta.setBackground(new java.awt.Color(0, 102, 204));
         btnEnviarRespuesta.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnEnviarRespuesta.setForeground(new java.awt.Color(255, 255, 255));
         btnEnviarRespuesta.setText("Enviar Respuestas");
         btnEnviarRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,15 +143,28 @@ public class JFormE_RealizarExamen extends javax.swing.JFrame {
 
     private void btnEnviarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarRespuestaActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Respuestas enviadas con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnEnviarRespuestaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        JFormE_VerExamenes verExamenes = new JFormE_VerExamenes();
-        verExamenes.setVisible(true);
+        if ("estudiante".equals(origen)) {
+            JFormEstudiante.getInstance().setVisible(true);
+        } else if ("verExamenes".equals(origen)) {
+            new JFormE_VerExamenes().setVisible(true);
+        }
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    
+    private void bloquearCierre() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                JOptionPane.showMessageDialog(JFormE_RealizarExamen.this, "No puedes cerrar esta ventana con la 'X'. Usa el botón Cancelar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -133,7 +195,7 @@ public class JFormE_RealizarExamen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFormE_RealizarExamen().setVisible(true);
+                new JFormE_RealizarExamen("estudiante").setVisible(true);
             }
         });
     }
